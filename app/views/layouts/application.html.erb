@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html ng-app="projectToDoApp">
+  <head>
+    <title>ProjectToDo</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+
+  </head>
+
+  <body ng-controller="RootController">
+    <%= yield %>
+  </body>
+
+  <%= javascript_include_tag 'application' %>
+</html>
