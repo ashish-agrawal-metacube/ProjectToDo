@@ -18,6 +18,9 @@
 //= require angular/angular.min
 //= require angular/angular-resource.min
 //= require angular/angular-animate.min
+//= require angular-cookie/angular-cookie.min
+//= require ng-token-auth
+//= require ui-bootstrap-tpls-2.5.0.min
 //
 //= require angular-rails-templates
 //

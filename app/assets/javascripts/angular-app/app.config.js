@@ -18,10 +18,17 @@ angular.module('projectToDoApp').config(['$stateProvider','$urlRouterProvider', 
     template: '<ui-view />',
   }
 
+  var containerUserState = {
+   name: 'container.user',
+   abstract: true,
+   templateUrl: "angular-app/dashboard/views/home.html"
+  }
+
   var containerPublicHomeState = {
     name: 'container.public.home',
     url: '/',
-    templateUrl: "angular-app/landing/home.html",
+    templateUrl: "angular-app/landing/views/home.html",
+    controller: "HomeCtrl"
   }
 
   var forbiddenState = {
@@ -30,8 +37,16 @@ angular.module('projectToDoApp').config(['$stateProvider','$urlRouterProvider', 
     templateUrl:"angular-app/common/views/403.html"
   }
 
+  var containerUserDashboardState = {
+    name: 'container.user.dashboard',
+    url: '/dashboard',
+    template: 'angular-app/dashboard/views/dashboard.html'
+  }
+
   $stateProvider.state(containerState);
   $stateProvider.state(containerPublicState);
+  $stateProvider.state(containerUserState);
   $stateProvider.state(containerPublicHomeState);
   $stateProvider.state(forbiddenState);
+
 }]);

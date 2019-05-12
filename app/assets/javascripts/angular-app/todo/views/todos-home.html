@@ -1,0 +1,68 @@
+<div class="container">
+  <h3>
+    Project Todos ({{$ctrl.project.name}})
+  </h3>
+
+  <div class="row" >
+    <div class="col-md-6">
+      <a href="" style="text-decoration: none;" ng-click="loadMyTodos()"  >
+        <div class="row" style="padding-top: 10px">
+          <div class="col-md-1">
+            <i class="fa fa-lg fa-square-o" ng-class="{'fa-square-o':!myTodos,'fa-check-square':myTodos }" ></i>
+          </div>
+          <div class="col-md-9 " style="padding-left: 0px">
+            <span>My Todos</span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-6">
+      <div class="pull-right" ng-if="$ctrl.project.can_user_add_todo">
+        <button class="btn btn-primary" ng-click="openTodoPopup($ctrl.project,newTodo)" ><span class="fa fa-plus"></span> Add Todo</button>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <table class="table table-bordered">
+    <thead>
+      <th>Title</th>
+      <th width="12%">Assignee</th>
+      <th width="5%">Type</th>
+      <th width="5%">Status</th>
+      <th width="12%">Creator</th>
+      <th width="12%">Creation Time</th>
+      <th width="8%">Action</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="todo in $ctrl.todos">
+        <td>
+          {{todo.title}}
+        </td>
+        <td>
+          {{todo.assignee.name}}
+        </td>
+        <td>
+          {{todo.display_type}}
+        </td>
+        <td>
+          <span style="font-size: 13px" class="label" ng-class="{'label-default': todo.status=='new', 'label-primary': todo.status=='in_progress', 'label-success': todo.status=='done'}">
+            {{todo.display_status}}
+          </span>
+        </td>
+        <td>
+          {{todo.creator.name}}
+        </td>
+        <td>
+          {{todo.created_at | date:'dd-MM-yyyy HH:mm'}}
+        <td>
+          <button ng-if="$ctrl.project.can_user_update_todo || todo.assignee_id==user.id" class="btn btn-sm btn-default" ng-click="openTodoPopup($ctrl.project,todo)"><span class="fa text-info fa-pencil"></span></button>
+          <button ng-if="$ctrl.project.can_user_delete_todo" class="btn btn-sm btn-default" ng-click="removeTodo(todo)">
+            <span class="fa text-danger fa-trash"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

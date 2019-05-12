@@ -3,17 +3,26 @@ angular.module('projectToDoApp', [
         'ngAnimate',
         'templates', // Angular rails templates module
         'ui.router',
-        'angular-loading-bar'
+        'angular-loading-bar',
+        'ng-token-auth',
+        'ui.bootstrap'
     ]);
 
 angular.module('projectToDoApp')
-      .run(['$http',function($http){
+      .run(['$http','$state','$transitions',function($http,$state,$transitions){
+
+        $transitions.onError({}, function(transition) {
+          if(transition.error().detail!==undefined && transition.error().detail.status==401){
+            $state.go("container.public.home");
+          }
+        });
+
 
       }]);
 
-angular.module('projectToDoApp').config(["$httpProvider", function($httpProvider){
-    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
-  }]);
+// angular.module('projectToDoApp').config(["$httpProvider", function($httpProvider){
+//     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+//   }]);
 
 angular.module('projectToDoApp')
       .controller('RootController',['$scope',function($scope){

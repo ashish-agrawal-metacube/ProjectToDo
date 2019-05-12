@@ -1,0 +1,43 @@
+<div class="container">
+  <h3>
+    Project Members ({{$ctrl.project.name}})
+  </h3>
+
+  <div class="row" ng-if="$ctrl.project.can_user_add_member">
+    <div class="col-md-12">
+
+      <div class="pull-right" >
+          <button class="btn btn-primary" ng-click="openMemberPopup($ctrl.project,newMember)" ><span class="fa fa-plus"></span> Add Member</button>
+        </div>
+    </div>
+  </div>
+  <br>
+
+  <table class="table table-bordered">
+    <thead>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="membership in $ctrl.memberships">
+        <td>
+          {{membership.user.name}}
+        </td>
+        <td>
+          {{membership.user.email}}
+        </td>
+        <td>
+          {{membership.role}}
+        </td>
+        <td>
+          <div ng-if="$ctrl.project.can_user_remove_member && user.id!=membership.user.id">
+            <button class="btn btn-sm btn-danger" ng-click="removeMember(membership)"><span class="fa fa-trash"></span> Remove</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

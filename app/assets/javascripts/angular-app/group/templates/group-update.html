@@ -1,0 +1,41 @@
+
+<form name="form" class="well form-horizontal" novalidate >
+  <div class="modal-header">
+
+    <span ng-if = "!$ctrl.group.id">  <h3 class="modal-title" id="modal-title">Add Project Group</h3> </span>
+    <span ng-if = "$ctrl.group.id">  <h3 class="modal-title" id="modal-title">{{$ctrl.group.name}}</h3> </span>
+
+  </div>
+
+    <div class="modal-body" id="modal-body">
+
+      <div class="alert alert-danger alert-dismissible" role="alert" ng-show="$ctrl.errors.length">
+          <button type="button" class="close" id="btnHideErrors" ng-click="$ctrl.errors = []" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <ul class="list-unstyled">
+              <li ng-repeat="error in $ctrl.errors" >
+                  {{error}}
+              </li>
+          </ul>
+      </div>
+
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-3 control-label">Group name</label>
+        <div class="col-md-9">
+          <input type="text" ng-model="$ctrl.group.name" name="name"  class="form-control" required="" >
+          <div ng-show="form.$submitted || form.name.$touched">
+            <span class="text-danger" ng-show="form.name.$error.required">Name is required</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text input-->
+
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit" ng-click="$ctrl.submit(form)">Save</button>
+        <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+    </div>
+</form>
