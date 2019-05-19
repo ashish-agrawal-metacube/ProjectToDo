@@ -61,4 +61,10 @@ class Todo < ApplicationRecord
     status.try(:titlecase)
   end
 
+  def self.status_list
+    [{name: DONE, display_name: DONE.titlecase},
+    {name: INPROGRESS, display_name: INPROGRESS.titlecase},
+    {name: NEW, display_name: NEW.titlecase}]
+  end
+
 end

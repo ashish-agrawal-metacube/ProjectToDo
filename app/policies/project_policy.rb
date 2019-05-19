@@ -20,6 +20,10 @@ class ProjectPolicy < ApplicationPolicy
     update?
   end
 
+  def status_vs_assignee_view?
+    show?
+  end
+
   class Scope < Scope
     def resolve
       scope.with_role([ Role::ADMIN, Role::DEVELOPER],user).preload(:roles)

@@ -1,6 +1,7 @@
 class ProjectSerializer < ActiveModel::Serializer
   attributes :id, :name, :group_id, :can_user_add_member, :can_user_remove_member, :can_user_add_todo, :can_user_update_todo, :can_user_delete_todo
 
+  belongs_to :group
 
   def can_user_add_member
     is_admin?
@@ -29,4 +30,9 @@ class ProjectSerializer < ActiveModel::Serializer
   def is_project_member?
     @is_member ||= scope.current_user.has_any_of_role?([Role::ADMIN,Role::DEVELOPER], object)
   end
+
+  class GroupSerializer < ActiveModel::Serializer
+    attributes :id, :name
+  end
+
 end

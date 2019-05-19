@@ -48,7 +48,7 @@
         <tbody>
           <tr ng-repeat="project in group.projects">
             <td>
-              <a style="font-size: 16px;text-decoration: none" ui-sref="container.user.project-todos({projectId: project.id})"> {{project.name}} </a>
+              <a href="" style="font-size: 16px;text-decoration: none" target="_blank" ui-sref="container.user.project-todos({projectId: project.id})"> {{project.name}} <span class="fa fa-external-link"></span> </a>
             </td>
             <td> {{project.members_count}} Members</td>
             <td>
@@ -93,7 +93,7 @@
         <tbody>
           <tr ng-repeat="project in group.projects">
             <td>
-              <a style="font-size: 16px;text-decoration: none" ui-sref="container.user.project-todos({projectId: project.id})"> {{project.name}} </a>
+              <a href="" style="font-size: 16px;text-decoration: none" target="_blank" ui-sref="container.user.project-todos({projectId: project.id})"> {{project.name}} <span class="fa fa-external-link"></span></a>
             </td>
             <td> {{project.members_count}} Members</td>
             <td>

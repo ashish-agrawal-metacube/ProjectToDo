@@ -4,13 +4,22 @@ class ProjectsController < ApplicationController
 
   before_action :set_group, only: [:create]
 
-  before_action :set_project, only: [:update, :show, :members, :add_member, :remove_member]
+  before_action :set_project, only: [:update, :show, :members, :add_member, :remove_member, :status_vs_assignee_view]
+
+  def index
+    @projects = policy_scope(Project).includes(:group)
+    if @projects.length==0
+      render json: {projects: []}, status: :ok
+    else
+      render json: @projects, status: :ok, fields: [:id, :name], include: [:group]
+    end
+  end
 
   def create
     authorize @group, :update?
     @project = Project.create_project(@group,project_params[:project],current_user)
     if @project.valid?
-      render json: @project, status: :ok
+      render json: @project, status: :ok,  include: []
     else
       render json: {errors: @project.errors.full_messages}, status: :unprocessable_entity
     end
@@ -18,13 +27,13 @@ class ProjectsController < ApplicationController
 
   def show
     authorize @project
-    render json: @project, status: :ok
+    render json: @project, status: :ok, include: []
   end
 
   def update
     authorize @project
     if @project.update_project(project_params[:project],current_user)
-      render json: @project, status: :ok
+      render json: @project, status: :ok, include: []
     else
       render json: {errors: @project.errors.full_messages}, status: :unprocessable_entity
     end
@@ -53,6 +62,11 @@ class ProjectsController < ApplicationController
     else
       render json: {errors: @project.errors.full_messages}, status: :unprocessable_entity
     end
+  end
+
+  def status_vs_assignee_view
+    authorize @project
+    render json: @project.status_vs_assignee_view, status: :ok
   end
 
   private

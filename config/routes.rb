@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       get :members
       post :add_member
       delete :remove_member
+      get :status_vs_assignee_view
     end
   end
 

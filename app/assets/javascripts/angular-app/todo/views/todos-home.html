@@ -37,7 +37,7 @@
     <tbody>
       <tr ng-repeat="todo in $ctrl.todos">
         <td>
-          {{todo.title}}
+          <a href="" style="text-decoration: none" ng-click="openTodoViewPopup($ctrl.project,todo,'lg')">{{todo.title}}</a> 
         </td>
         <td>
           {{todo.assignee.name}}

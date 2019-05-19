@@ -44,7 +44,7 @@ angular.module('projectToDoApp').controller('ProjectTodoController', ['$scope','
 
   $scope.removeTodo = function(todo){
 
-    if( confirm("Are you sure you want to delte this todo?") ){
+    if( confirm("Are you sure you want to delete this todo?") ){
         TodoService.delete({id: todo.id}).$promise.then(function(resp) {
             console.log(resp);
             // handle success response
@@ -76,5 +76,34 @@ angular.module('projectToDoApp').controller('ProjectTodoController', ['$scope','
     });
 
   }
+
+
+  $scope.openTodoViewPopup = function (project,todo,size ) {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: 'angular-app/todo/templates/todo-view.html',
+      controller: 'TodoViewModalInstanceCtrl',
+      controllerAs: '$ctrl',
+      keyboard: false,
+      backdrop: 'static',
+      size: size,
+      resolve: {
+        project: function(){
+          return angular.copy(project);
+        },
+        todo: function(){
+          return angular.copy(todo);
+        }
+      }
+    });
+
+    modalInstance.result.then(function (user) {
+      $state.reload();
+    }, function () {
+      // $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
 
 }]);

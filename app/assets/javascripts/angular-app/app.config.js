@@ -37,12 +37,6 @@ angular.module('projectToDoApp').config(['$stateProvider','$urlRouterProvider', 
     templateUrl:"angular-app/common/views/403.html"
   }
 
-  var containerUserDashboardState = {
-    name: 'container.user.dashboard',
-    url: '/dashboard',
-    template: 'angular-app/dashboard/views/dashboard.html'
-  }
-
   $stateProvider.state(containerState);
   $stateProvider.state(containerPublicState);
   $stateProvider.state(containerUserState);
