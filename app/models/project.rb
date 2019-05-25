@@ -76,14 +76,29 @@ class Project < ApplicationRecord
   def status_vs_assignee_view
     assignee_ids = Todo.where(project: self).select(:assignee_id).distinct.pluck(:assignee_id)
     x_axis = User.where(id: assignee_ids).order(:name).map {|user| {id: user.id, name: user.name} }
-
     y_axis = Todo.status_list
-
     table = Array.new(x_axis.length){ Array.new(y_axis.length){ Array.new() } }
 
     todos = Todo.select(:id,:title,:assignee_id,:status).where(project: self)
     todos.each do |todo|
       row = x_axis.index { |user| user[:id]==todo.assignee_id }
+      col = y_axis.index { |status| status[:name]==todo.status }
+      table[row][col] << {id: todo.id, title: todo.title}
+    end
+
+    {x_axis: x_axis,y_axis: y_axis, table: table}
+  end
+
+  def self.status_vs_project_view(projects)
+    x_axis = projects.map do |project|
+      { id: project.id, name: project.name, group: {id: project.group.id, name: project.group.name } }
+    end
+    y_axis = Todo.status_list
+    table = Array.new(x_axis.length){ Array.new(y_axis.length){ Array.new() } }
+
+    todos = Todo.select(:id,:title,:project_id,:status).where(project: projects.map(&:id) )
+    todos.each do |todo|
+      row = x_axis.index { |project| project[:id]==todo.project_id }
       col = y_axis.index { |status| status[:name]==todo.status }
       table[row][col] << {id: todo.id, title: todo.title}
     end

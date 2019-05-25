@@ -41,8 +41,11 @@ class TodosController < ApplicationController
 
   def destroy
     authorize @todo
-    @todo.destroy
-    render json: @todo, status: :ok
+    if @todo.destroy
+      render json: @todo, status: :ok
+    else
+      render json: {errors: ["Some error occured while deleting this todo."]}, status: :unprocessable_entity
+    end
   end
 
   private

@@ -19,6 +19,8 @@
     <div class="col-md-6">
       <div class="pull-right" ng-if="$ctrl.project.can_user_add_todo">
         <button class="btn btn-primary" ng-click="openTodoPopup($ctrl.project,newTodo)" ><span class="fa fa-plus"></span> Add Todo</button>
+        &nbsp; &nbsp;
+        <button class="btn btn-success" ng-click="openMembers($ctrl.project)"><span class="fa fa-users"></span> Users</button>
       </div>
     </div>
   </div>
@@ -37,7 +39,7 @@
     <tbody>
       <tr ng-repeat="todo in $ctrl.todos">
         <td>
-          <a href="" style="text-decoration: none" ng-click="openTodoViewPopup($ctrl.project,todo,'lg')">{{todo.title}}</a> 
+          <a href="" style="text-decoration: none" ng-click="openTodoViewPopup($ctrl.project,todo,'lg')">{{todo.title}}</a>
         </td>
         <td>
           {{todo.assignee.name}}

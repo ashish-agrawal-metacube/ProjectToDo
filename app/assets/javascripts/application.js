@@ -28,6 +28,8 @@
 //
 //= require loading-bar/loading-bar.min
 //
+//= require angular-google-chart/ng-google-chart.min
+//
 //= require angular-app/app.module
 
 //= require_tree .

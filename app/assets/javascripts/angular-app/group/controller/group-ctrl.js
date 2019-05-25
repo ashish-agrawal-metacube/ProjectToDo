@@ -1,4 +1,4 @@
-angular.module('projectToDoApp').controller('GroupController', ['$scope','$uibModal','myGroups','membershipGroups','$state', function ($scope,$uibModal,myGroups,membershipGroups,$state) {
+angular.module('projectToDoApp').controller('GroupController', ['$scope','$uibModal','myGroups','membershipGroups','$state','GroupService','ProjectService', function ($scope,$uibModal,myGroups,membershipGroups,$state,GroupService,ProjectService) {
 
   var $ctrl = this;
 
@@ -70,6 +70,37 @@ angular.module('projectToDoApp').controller('GroupController', ['$scope','$uibMo
   $scope.openMembers = function(project){
     $state.go('container.user.project-members', {projectId: project.id});
   }
+
+  $scope.deleteGroup = function(group){
+
+    if( confirm("All projects, todos, and memberships associated with this group will be removed. Are you sure you want to delete this group?") ){
+        GroupService.delete({id: group.id}).$promise.then(function(resp) {
+            console.log(resp);
+            // handle success response
+            $state.reload();
+          })
+          .catch(function(resp) {
+            alert(resp.data.errors);
+            // handle error response
+          });
+    }
+
+  };
+
+  $scope.deleteProject = function(project){
+
+    if( confirm("You are about to permanently delete the project \""+project.name+"\". This will delete all associated todos and memberships. Are you sure you want to do this?") ){
+        ProjectService.delete({id: project.id}).$promise.then(function(resp) {
+            console.log(resp);
+            // handle success response
+            $state.reload();
+          })
+          .catch(function(resp) {
+            alert(resp.data.errors);
+            // handle error response
+          });
+    }
+  };
 
 
 }]);

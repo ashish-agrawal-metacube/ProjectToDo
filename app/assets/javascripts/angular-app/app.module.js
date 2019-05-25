@@ -5,7 +5,8 @@ angular.module('projectToDoApp', [
         'ui.router',
         'angular-loading-bar',
         'ng-token-auth',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'googlechart'
     ]);
 
 angular.module('projectToDoApp')

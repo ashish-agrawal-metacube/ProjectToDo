@@ -4,47 +4,27 @@
 
   <br/>
 
-  <div class="row" ng-show="$ctrl.projects">
-    <div class="col-md-1">
-      <label class="control-label">Project</label>
-    </div>
-    <div class="col-md-4">
-      <select class="form-control" ng-options="project.name_with_group for project in $ctrl.projects" name="status" ng-model="$ctrl.selectedProject" ></select>
-    </div>
-    <div class="col-md-2 col-md-offset-2">
-      <button type="submit" class="btn btn-default" ng-click="loadView()">Load Data</button>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div role="tabpanel">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-tab-striped" >
+          <li ui-sref-active="active"><a ui-sref=".members_table" >  Project Member Wise </a></li>
+          <li ui-sref-active="active" ><a ui-sref=".projects_table"  >  Project Wise </a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="row">
+            <div class="col-md-12 tab-pane active" style="padding-top: 15px;padding-bottom: 15px" ui-view></div>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
 
-  <br/>
-  <br/>
-
-  <table class="table table-striped" ng-show="$ctrl.viewData">
-    <thead>
-      <tr>
-        <th>Status</th>
-        <th ng-repeat="member in $ctrl.viewData.x_axis">
-          {{member.name}}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="status in $ctrl.viewData.y_axis" ng-init="yIndex=$index">
-        <th>
-          {{status.display_name}}
-        </th>
-        <td ng-repeat="data in $ctrl.viewData.table" ng-init="xIndex=$index">
-
-          <ul class="list-unstyled">
-            <li ng-repeat="todo in data[yIndex]">
-              {{todo.title}}
-            </li>
-          </ul>
-
-        </td>
-      </tr>
-    </tbody>
-
-  </table>
 
 </div>

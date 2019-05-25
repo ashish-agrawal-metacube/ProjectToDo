@@ -106,4 +106,8 @@ angular.module('projectToDoApp').controller('ProjectTodoController', ['$scope','
     });
   };
 
+  $scope.openMembers = function(project){
+    $state.go('container.user.project-members', {projectId: project.id});
+  }
+
 }]);

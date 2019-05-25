@@ -9,17 +9,20 @@ Rails.application.routes.draw do
 
   root "application#index"
 
-  resources :groups, only: [:index, :create ,:update, :show] do
+  resources :groups, only: [:index, :create ,:update, :show, :destroy] do
     member do
     end
   end
 
-  resources :projects, only: [:index, :create ,:update, :show] do
+  resources :projects, only: [:index, :create ,:update, :show, :destroy] do
     member do
       get :members
       post :add_member
       delete :remove_member
       get :status_vs_assignee_view
+    end
+    collection do
+      get :status_vs_project_view
     end
   end
 

@@ -8,6 +8,10 @@ class GroupPolicy < ApplicationPolicy
     user.has_role?( Role::OWNER, record)
   end
 
+  def destroy?
+    user.has_role?( Role::OWNER, record)
+  end
+
   class Scope < Scope
     def resolve
       scope.with_role([ Role::OWNER, Role::MEMBER],user).preload(:roles)

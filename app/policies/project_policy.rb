@@ -24,6 +24,10 @@ class ProjectPolicy < ApplicationPolicy
     show?
   end
 
+  def destroy?
+    user.has_role? Role::OWNER, record.group
+  end
+
   class Scope < Scope
     def resolve
       scope.with_role([ Role::ADMIN, Role::DEVELOPER],user).preload(:roles)

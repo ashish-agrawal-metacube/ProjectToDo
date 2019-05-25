@@ -1,6 +1,6 @@
 <div class="container">
   <h3>
-    Project Members ({{$ctrl.project.name}})
+    Project Members (<a href="" style="text-decoration: none" ui-sref="container.user.project-todos({projectId: $ctrl.project.id})">{{$ctrl.project.name}}</a>)
   </h3>
 
   <div class="row" ng-if="$ctrl.project.can_user_add_member">

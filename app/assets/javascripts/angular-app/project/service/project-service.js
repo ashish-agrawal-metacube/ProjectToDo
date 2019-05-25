@@ -6,7 +6,8 @@ angular.module('projectToDoApp').factory ('ProjectService', ['$resource', functi
     memberships: {params: {action: "members"}, method: "GET"},
     addMember: {params: {action: "add_member"}, method: "POST"},
     removeMember: {params: {action: "remove_member"}, method: "DELETE"},
-    statusVsAssigneeView: { params: {action: "status_vs_assignee_view"}, method: "GET"}
+    statusVsAssigneeView: { params: {action: "status_vs_assignee_view"}, method: "GET"},
+    statusVsProjectView: { params: {action: "status_vs_project_view"}, method: "GET"}
   });
 
 }]);

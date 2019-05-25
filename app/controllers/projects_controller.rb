@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
 
   before_action :set_group, only: [:create]
 
-  before_action :set_project, only: [:update, :show, :members, :add_member, :remove_member, :status_vs_assignee_view]
+  before_action :set_project, only: [:update, :show, :members, :add_member, :remove_member, :destroy ,:status_vs_assignee_view]
 
   def index
     @projects = policy_scope(Project).includes(:group)
@@ -64,9 +64,23 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def destroy
+    authorize @project
+    if @project.destroy
+      render json: @project, status: :ok, fields: [:id, :name], include: [:group]
+    else
+      render json: {errors: ["Some error occured while deleting project: #{@project.name} "] }, status: :unprocessable_entity
+    end
+  end
+
   def status_vs_assignee_view
     authorize @project
     render json: @project.status_vs_assignee_view, status: :ok
+  end
+
+  def status_vs_project_view
+    @projects = policy_scope(Project).includes(:group)
+    render json: Project.status_vs_project_view(@projects), status: :ok
   end
 
   private

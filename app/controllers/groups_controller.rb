@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
 
   before_action :authenticate_current_user
 
-  before_action :set_group, only: [:update, :show]
+  before_action :set_group, only: [:update, :show, :destroy]
 
   def index
     @groups = policy_scope(Group).includes(:projects).filter(search_params)
@@ -33,6 +33,15 @@ class GroupsController < ApplicationController
       render json: @group, status: :ok
     else
       render json: {errors: @group.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    authorize @group
+    if @group.destroy
+      render json: @group, status: :ok, fields: [:id, :name]
+    else
+      render json: {errors: ["Some error occured while deleting group: #{@group.name} "] }, status: :unprocessable_entity
     end
   end
 
