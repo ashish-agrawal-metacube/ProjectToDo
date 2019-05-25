@@ -2,6 +2,7 @@ angular.module('projectToDoApp').controller('DashboardProjectsController', ['$sc
 
   var $ctrl = this;
 
+
   $ctrl.gridData = gridData;
 
   $scope.columnChartObject = {};

@@ -1,4 +1,11 @@
-<div class="row" ng-show="$ctrl.projects">
+
+<div class="panel panel-default" ng-show="!$ctrl.projects.length">
+    <div class="text-center panel-body bg-warning">
+        <h4 class="text-warning"><i class="fa fa-info-circle"></i> No projects exist!!</h4>
+    </div>
+</div>
+
+<div class="row" ng-show="$ctrl.projects.length">
   <div class="col-md-1">
     <label class="control-label">Project</label>
   </div>
@@ -12,8 +19,13 @@
 
 <br/>
 <br/>
+<div class="panel panel-default" ng-show="$ctrl.projects.length && $ctrl.gridData && !$ctrl.gridData.table.length">
+    <div class="text-center panel-body bg-warning">
+        <h4 class="text-warning"><i class="fa fa-info-circle"></i> No todos exist in this project!!</h4>
+    </div>
+</div>
 
-<table class="table table-striped" ng-show="$ctrl.gridData">
+<table class="table table-striped" ng-show="$ctrl.gridData.table.length">
   <thead>
     <tr>
       <th>Status</th>
@@ -41,6 +53,6 @@
 
 </table>
 
-<div ng-if="projectChartObject">
+<div ng-if="$ctrl.gridData.table.length && projectChartObject">
   <div google-chart chart="projectChartObject" style="height:600px; width:100%;"></div>
 </div>

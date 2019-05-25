@@ -1,34 +1,43 @@
+
+<div class="panel panel-default" ng-show="!$ctrl.gridData.table.length">
+    <div class="text-center panel-body bg-warning">
+        <h4 class="text-warning"><i class="fa fa-info-circle"></i> No projects exist!!</h4>
+    </div>
+</div>
+
+
 <br/>
 <br/>
+<div ng-show="$ctrl.gridData.table.length > 0">
+  <table class="table table-striped" >
+    <thead>
+      <tr>
+        <th>Project</th>
+        <th ng-repeat="project in $ctrl.gridData.x_axis">
+          {{project.name}} (Group: {{project.group.name}} )
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="status in $ctrl.gridData.y_axis" ng-init="yIndex=$index">
+        <th>
+          {{status.display_name}}
+        </th>
+        <td ng-repeat="data in $ctrl.gridData.table" ng-init="xIndex=$index">
 
-<table class="table table-striped" ng-show="$ctrl.gridData">
-  <thead>
-    <tr>
-      <th>Project</th>
-      <th ng-repeat="project in $ctrl.gridData.x_axis">
-        {{project.name}} (Group: {{project.group.name}} )
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="status in $ctrl.gridData.y_axis" ng-init="yIndex=$index">
-      <th>
-        {{status.display_name}}
-      </th>
-      <td ng-repeat="data in $ctrl.gridData.table" ng-init="xIndex=$index">
+          <ul class="list-unstyled">
+            <li ng-repeat="todo in data[yIndex]">
+              {{todo.title}}
+            </li>
+          </ul>
 
-        <ul class="list-unstyled">
-          <li ng-repeat="todo in data[yIndex]">
-            {{todo.title}}
-          </li>
-        </ul>
+        </td>
+      </tr>
+    </tbody>
 
-      </td>
-    </tr>
-  </tbody>
+  </table>
 
-</table>
-
-<div ng-if="columnChartObject">
-  <div google-chart chart="columnChartObject" style="height:600px; width:100%;"></div>
+  <div ng-if="columnChartObject">
+    <div google-chart chart="columnChartObject" style="height:600px; width:100%;"></div>
+  </div>
 </div>
