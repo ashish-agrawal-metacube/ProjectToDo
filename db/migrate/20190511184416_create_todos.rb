@@ -15,7 +15,7 @@ class CreateTodos < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_index :todos, [:project, :todo_type]
-    add_index :todos, [:project, :status]
+    add_index :todos, [:project_id, :todo_type]
+    add_index :todos, [:project_id, :status]
   end
 end

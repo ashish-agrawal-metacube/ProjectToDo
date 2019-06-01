@@ -58,10 +58,10 @@ ActiveRecord::Schema.define(version: 2019_05_11_184416) do
     t.datetime "updated_at", null: false
     t.index ["assignee_id"], name: "index_todos_on_assignee_id"
     t.index ["creator_id"], name: "index_todos_on_creator_id"
+    t.index ["project_id", "status"], name: "index_todos_on_project_id_and_status"
+    t.index ["project_id", "todo_type"], name: "index_todos_on_project_id_and_todo_type"
     t.index ["project_id"], name: "index_todos_on_project_id"
     t.index ["updator_id"], name: "index_todos_on_updator_id"
-    t.index [nil, "status"], name: "index_todos_on_project_and_status"
-    t.index [nil, "todo_type"], name: "index_todos_on_project_and_todo_type"
   end
 
   create_table "users", force: :cascade do |t|
